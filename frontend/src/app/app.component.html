@@ -1,0 +1,17 @@
+<div class="wrapper">
+
+    <app-vertical-navigation [hidden]="!user"></app-vertical-navigation>
+
+    <div [ngClass]="{'main-panel' : user}">
+
+        <!-- UPPER NAVBAR -->
+        <!--<horizontal-navigation-component *ngIf="user"></horizontal-navigation-component>-->
+
+        <!-- MAIN CONTENT -->
+        <router-outlet></router-outlet>
+
+        <app-footer [hidden]="!user"></app-footer>
+
+    </div>
+
+</div>

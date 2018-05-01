@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'assets/scss/material-kit.scss';
+@import 'assets/scss/material-dashboard.scss';
+
+/* invalid & (dirty or touched) => red -- CSS3 only */
+
+.ng-invalid.ng-dirty:not(:focus),
+.ng-invalid.ng-touched:not(:focus) {
+    border-color: #e74c3c;
+}
+
+table {
+    display: table !important;
+}
+
+ul.ngx-pagination {
+    li.current {
+        color: #ed6a00 !important;
+        font-style: italic !important;
+        font-weight: bold !important;
+        background: none;
+    }
+}
