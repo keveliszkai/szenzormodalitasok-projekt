@@ -3,9 +3,12 @@ import { RouterModule, Routes, CanActivate, CanActivateChild } from '@angular/ro
 
 import { LoginComponent } from './auth';
 import { DashboardMainComponent } from './dashboard';
+import { AuthGuard } from './authentication';
+import { MeasurementListComponent } from './measurement/list/measurement-list.component';
 
 const appRoutes: Routes = [
-  { path: '', component: DashboardMainComponent },
+  { path: '', component: DashboardMainComponent, canActivate: [AuthGuard] },
+  { path: 'measurement', component: MeasurementListComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent }
 ];
 

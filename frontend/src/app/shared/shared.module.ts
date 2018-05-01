@@ -6,10 +6,19 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [LoaderComponent],
-  imports: [DependencyModule, RouterModule, FormsModule, ReactiveFormsModule, HttpModule, HttpClientModule],
+  imports: [
+    DependencyModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpModule,
+    HttpClientModule,
+    CommonModule
+  ],
   exports: [
     DependencyModule,
     LoaderComponent,
@@ -17,7 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule
   ],
   providers: []
 })

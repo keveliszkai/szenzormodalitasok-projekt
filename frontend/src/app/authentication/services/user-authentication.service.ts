@@ -73,11 +73,11 @@ export class UserAuthenticationService {
     return new Promise((resolve, reject) => {
       if (this.oauthService.hasToken()) {
         this.apiService
-          .get('/users/me')
+          .get<AuthenticationUser>('/users/me')
           // .map(i => AuthenticationUser.loadFromResponse(i))
           .subscribe(
-            (data: AuthenticationUser) => {
-              this.setAuth(data);
+            reponse => {
+              this.setAuth(reponse.data);
               resolve(true);
             },
             err => {
@@ -171,9 +171,9 @@ export class UserAuthenticationService {
   public getUser(): Observable<AuthenticationUser> {
     return new Observable<AuthenticationUser>(observer => {
       if (this.oauthService.hasToken()) {
-        this.apiService.get('/users/me').subscribe(
+        this.apiService.get<AuthenticationUser>('/users/me').subscribe(
           data => {
-            observer.next(data);
+            observer.next(data.data);
           },
           err => observer.error(null)
         );

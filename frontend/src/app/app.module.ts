@@ -9,6 +9,7 @@ import { FooterModule } from './footer';
 import { NavigationModule } from './navigation';
 import { DashboardModule } from './dashboard';
 import { AuthModule } from './auth';
+import { MeasurementModule } from './measurement/measurement.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +21,8 @@ import { AuthModule } from './auth';
     FooterModule,
     NavigationModule,
     DashboardModule,
-    AuthModule
+    AuthModule,
+    MeasurementModule
   ],
   providers: [],
   bootstrap: [AppComponent]

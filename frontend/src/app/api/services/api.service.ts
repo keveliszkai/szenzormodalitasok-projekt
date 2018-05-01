@@ -55,8 +55,8 @@ export class ApiService {
    * @param params The query params, that goes with the request.
    * @example getList<MyObject>('/api/some/route', { search: 'some string' });
    */
-  public get(path: string, params: object = {}): Observable<any> {
-    return this.http.get(`${this.apiUrl}${path}`, {
+  public get<T>(path: string, params: object = {}): Observable<{ data: T }> {
+    return this.http.get<{ data: T }>(`${this.apiUrl}${path}`, {
       headers: this.setHeaders(),
       params: this.objectToParams(params)
     });
