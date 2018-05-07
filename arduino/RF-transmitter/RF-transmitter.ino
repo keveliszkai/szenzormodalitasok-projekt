@@ -55,7 +55,7 @@ void loop() {
 
     if (numberOfSeconds > rfSignalSeconds) {
 
-      String buf = String(maxSound) + '|' + String(isMoved);
+      String buf = String(maxSound) + '|' + String(isMoved) + 'X';
       unsigned int bufferSize = 10;
       char charBuffer[bufferSize];
       buf.toCharArray(charBuffer , bufferSize);
