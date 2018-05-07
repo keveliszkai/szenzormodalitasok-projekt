@@ -27,8 +27,8 @@ export class ApiService {
    */
   private setHeaders(isForm = false): HttpHeaders {
     const headersConfig = {
-      'Content-type': 'application/json'
-      // 'Access-Control-Allow-Origin': this.apiUrl
+      'Content-type': 'application/json',
+      'Access-Control-Allow-Origin': this.apiUrl
     };
 
     if (isForm) {
