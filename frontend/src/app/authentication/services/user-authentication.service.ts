@@ -102,6 +102,7 @@ export class UserAuthenticationService {
       params.append('client_secret', environment.clientSecret);
 
       const headers = new Headers({
+        'Access-Control-Allow-Origin': environment.apiUrl,
         'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
         Authorization: 'Basic ' + btoa('fooClientIdPassword:secret')
       });
