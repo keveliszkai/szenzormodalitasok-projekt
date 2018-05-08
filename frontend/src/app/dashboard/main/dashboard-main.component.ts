@@ -33,9 +33,9 @@ export class DashboardMainComponent extends BaseComponent {
       this.measurement = data;
       const datas = [];
       this.measurement.forEach(i => {
-        const sound = data.find(s => s.date == i.date && s.type == MeasurementType.percent);
-        const movement = data.find(s => s.date == i.date && s.type == MeasurementType.boolean);
-        datas.push([i.date, movement ? movement.value * 100 : 0, sound ? sound.value : 0]);
+        const sound = data.find(s => s.date == i.date && s.type == MeasurementType.sound);
+        const movement = data.find(s => s.date == i.date && s.type == MeasurementType.movement);
+        datas.push([i.date, movement ? +movement.value * 100 : 0, sound ? sound.value : 0]);
       });
 
       const g = new Dygraph(
@@ -52,9 +52,9 @@ export class DashboardMainComponent extends BaseComponent {
       this.measurement = data;
       const datas = [];
       this.measurement.forEach(i => {
-        const sound = data.find(s => s.date == i.date && s.type == MeasurementType.percent);
-        const movement = data.find(s => s.date == i.date && s.type == MeasurementType.boolean);
-        datas.push([i.date, movement ? movement.value * 100 : 0, sound ? sound.value : 0]);
+        const sound = data.find(s => s.date == i.date && s.type == MeasurementType.sound);
+        const movement = data.find(s => s.date == i.date && s.type == MeasurementType.movement);
+        datas.push([i.date, movement ? +movement.value * 100 : 0, sound ? sound.value : 0]);
       });
 
       const g = new Dygraph(

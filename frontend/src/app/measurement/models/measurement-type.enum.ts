@@ -1,5 +1,5 @@
 export enum MeasurementType {
-  'percent' = 1,
-  'celsius' = 2,
-  'boolean' = 3
+  'sound' = 1,
+  'movement' = 2,
+  'temperature' = 3
 }
