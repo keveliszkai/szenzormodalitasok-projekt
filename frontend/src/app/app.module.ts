@@ -10,7 +10,6 @@ import { NavigationModule } from './navigation';
 import { DashboardModule } from './dashboard';
 import { AuthModule } from './auth';
 import { MeasurementModule } from './measurement/measurement.module';
-import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,8 +22,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     NavigationModule,
     DashboardModule,
     AuthModule,
-    MeasurementModule,
-    ChartsModule
+    MeasurementModule
   ],
   providers: [],
   bootstrap: [AppComponent]

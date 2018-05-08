@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { BaseComponent } from '../../shared/components/base/base.component';
 import { DashboardService } from '../services/dashboard.service';
 import { ServerInfo } from '../models/server-info.model';
 import { MeasurementService } from '../../measurement/services/measurement.service';
 import { Measurement } from '../../measurement/models/measurement.model';
 import { MeasurementType } from '../../measurement/models/measurement-type.enum';
+import Dygraph from 'dygraphs';
 
 @Component({
   templateUrl: 'dashboard-main.component.html'
@@ -12,6 +13,9 @@ import { MeasurementType } from '../../measurement/models/measurement-type.enum'
 export class DashboardMainComponent extends BaseComponent {
   public model: ServerInfo;
   public measurement: Measurement[];
+
+  @ViewChild('graph') graph: ElementRef;
+  @ViewChild('graph2') graph2: ElementRef;
 
   constructor(private service: DashboardService, private measurementService: MeasurementService) {
     super();
@@ -25,76 +29,42 @@ export class DashboardMainComponent extends BaseComponent {
       this.stopLoading();
     });
 
-    this.measurementService.getAll({ from: '2018-05-07 12:00:00', to: '2018-05-08 12:00:00' }).subscribe(data => {
+    this.measurementService.getAll({ from: '2000-05-07 12:00:00', to: '2018-05-08 12:00:00' }).subscribe(data => {
       this.measurement = data;
+      const datas = [];
       this.measurement.forEach(i => {
         const sound = data.find(s => s.date == i.date && s.type == MeasurementType.percent);
         const movement = data.find(s => s.date == i.date && s.type == MeasurementType.boolean);
-
-        this.lineChartData[0].data.push(movement ? movement.value : 0);
-        this.lineChartData[1].data.push(sound ? sound.value : 0);
-        this.lineChartLabels.push(i.date.toUTCString());
+        datas.push([i.date, movement ? movement.value * 100 : 0, sound ? sound.value : 0]);
       });
+
+      const g = new Dygraph(
+        // containing div
+        this.graph.nativeElement,
+        datas,
+        {
+          labels: ['Date', 'Movement', 'Sound']
+        }
+      );
     });
 
-    this.measurementService.getAll({ from: '2018-05-08 12:00:00', to: '2018-05-09 12:00:00' }).subscribe(data => {
+    this.measurementService.getAll({ from: '2000-05-08 12:00:00', to: '2018-05-09 12:00:00' }).subscribe(data => {
       this.measurement = data;
+      const datas = [];
       this.measurement.forEach(i => {
-        const data = [];
-        const data2 = [];
         const sound = data.find(s => s.date == i.date && s.type == MeasurementType.percent);
         const movement = data.find(s => s.date == i.date && s.type == MeasurementType.boolean);
-
-        data.push(movement ? movement.value : 0);
-        this.lineChartData2[1].data.push(sound ? sound.value : 0);
-        this.lineChartLabels2.push(i.date.toUTCString());
+        datas.push([i.date, movement ? movement.value * 100 : 0, sound ? sound.value : 0]);
       });
+
+      const g = new Dygraph(
+        // containing div
+        this.graph2.nativeElement,
+        datas,
+        {
+          labels: ['Date', 'Movement', 'Sound']
+        }
+      );
     });
   }
-
-  // CHART
-  // lineChart
-
-  public lineChartData: Array<any> = [{ data: [], label: 'Movement', yAxisId: '01' }, { data: [], label: 'Sound', yAxisId: '02' }];
-
-  public lineChartData2: Array<any> = [{ data: [], label: 'Movement', yAxisId: '01' }, { data: [], label: 'Sound', yAxisId: '02' }];
-  public lineChartLabels: Array<any> = [];
-  public lineChartLabels2: Array<any> = [];
-  public lineChartOptions: any = {
-    responsive: true,
-    scales: {
-      yAxes: [
-        {
-          id: 'yAxis1',
-          position: 'left'
-        },
-        {
-          id: 'yAxis2',
-          position: 'right'
-        }
-      ]
-    }
-  };
-  public lineChartColors: Array<any> = [
-    {
-      // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    },
-    {
-      // dark grey
-      backgroundColor: 'rgba(77,83,96,0.2)',
-      borderColor: 'rgba(77,83,96,1)',
-      pointBackgroundColor: 'rgba(77,83,96,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)'
-    }
-  ];
-  public lineChartLegend: boolean = true;
-  public lineChartType: string = 'line';
 }
