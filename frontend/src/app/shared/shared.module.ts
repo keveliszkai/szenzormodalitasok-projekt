@@ -7,18 +7,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [LoaderComponent],
-  imports: [
-    DependencyModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpModule,
-    HttpClientModule,
-    CommonModule
-  ],
+  imports: [DependencyModule, RouterModule, FormsModule, ReactiveFormsModule, HttpModule, HttpClientModule, CommonModule, ChartsModule],
   exports: [
     DependencyModule,
     LoaderComponent,
@@ -27,7 +20,8 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     HttpModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    ChartsModule
   ],
   providers: []
 })

@@ -28,7 +28,9 @@
                             <i class="material-icons">airline_seat_individual_suite</i>
                         </div>
                         <p class="card-category">Sleeping time</p>
-                        <h3 class="card-title">245&nbsp;<small>h</small></h3>
+                        <h3 class="card-title">245&nbsp;
+                            <small>h</small>
+                        </h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
@@ -44,7 +46,9 @@
                             <i class="material-icons">show_chart</i>
                         </div>
                         <p class="card-category">Memory usage</p>
-                        <h3 class="card-title">{{model.memoryInMegabytes}}&nbsp;<small>MB</small></h3>
+                        <h3 class="card-title">{{model.memoryInMegabytes}}&nbsp;
+                            <small>MB</small>
+                        </h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
@@ -71,6 +75,38 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-md-12">
+                <app-loader [loading]="loading"></app-loader>
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Measurement</h4>
+                        <p class="card-category">2018-05-07</p>
+                    </div>
+                    <div class="card-body">
+                        <div *ngIf="measurement">
+                            <canvas baseChart width="800" height="200" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <app-loader [loading]="loading"></app-loader>
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Measurement</h4>
+                        <p class="card-category">2018-05-08</p>
+                    </div>
+                    <div class="card-body">
+                        <div *ngIf="measurement">
+                            <canvas baseChart width="800" height="200" [datasets]="lineChartData2" [labels]="lineChartLabels2" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="row">
             <div class="col-md-4">
                 <div class="card card-chart">
                     <div class="card-header card-header-success">
@@ -411,6 +447,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 </div>

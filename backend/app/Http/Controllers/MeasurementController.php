@@ -8,8 +8,21 @@ use Illuminate\Http\Request;
 
 class MeasurementController extends Controller{
 
-	public function index(){
-		$list = Measurement::all();
+	public function index(Request $request){
+		$from = $request->get('from', false);
+		$to = $request->get('to', false);
+
+		if($from &&$to) {
+			$list = Measurement::query()
+							->where('date', '>', date('Y-m-d H:i:s', strtotime($from)))
+							->where('date', '<', date('Y-m-d H:i:s', strtotime($to)))
+							->orderBy('date', 'desc')
+							->get();
+		} else {
+			$list = Measurement::query()
+							->orderBy('date', 'desc')
+							->get();
+		}
 		return $this->success($list, 200);
 	}
 
