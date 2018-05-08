@@ -25,27 +25,29 @@ export class DashboardMainComponent extends BaseComponent {
       this.stopLoading();
     });
 
-    this.measurementService.getAll({ from: '2017-05-07 12:00:00', to: '2018-05-08 12:00:00' }).subscribe(data => {
+    this.measurementService.getAll({ from: '2018-05-07 12:00:00', to: '2018-05-08 12:00:00' }).subscribe(data => {
       this.measurement = data;
       this.measurement.forEach(i => {
         const sound = data.find(s => s.date == i.date && s.type == MeasurementType.percent);
         const movement = data.find(s => s.date == i.date && s.type == MeasurementType.boolean);
 
-        this.lineChartData[0].data.push(movement ? movement : 0);
-        this.lineChartData[1].data.push(sound ? sound : 0);
-        this.lineChartLabels.push(i.date.getUTCHours());
+        this.lineChartData[0].data.push(movement ? movement.value : 0);
+        this.lineChartData[1].data.push(sound ? sound.value : 0);
+        this.lineChartLabels.push(i.date.toUTCString());
       });
     });
 
     this.measurementService.getAll({ from: '2018-05-08 12:00:00', to: '2018-05-09 12:00:00' }).subscribe(data => {
       this.measurement = data;
       this.measurement.forEach(i => {
+        const data = [];
+        const data2 = [];
         const sound = data.find(s => s.date == i.date && s.type == MeasurementType.percent);
         const movement = data.find(s => s.date == i.date && s.type == MeasurementType.boolean);
 
-        this.lineChartData2[0].data.push(movement ? movement : 0);
-        this.lineChartData2[1].data.push(sound ? sound : 0);
-        this.lineChartLabels2.push(i.date.getUTCHours());
+        data.push(movement ? movement.value : 0);
+        this.lineChartData2[1].data.push(sound ? sound.value : 0);
+        this.lineChartLabels2.push(i.date.toUTCString());
       });
     });
   }
@@ -53,13 +55,25 @@ export class DashboardMainComponent extends BaseComponent {
   // CHART
   // lineChart
 
-  public lineChartData: Array<any> = [{ data: [], label: 'Movement' }, { data: [], label: 'Sound' }];
+  public lineChartData: Array<any> = [{ data: [], label: 'Movement', yAxisId: '01' }, { data: [], label: 'Sound', yAxisId: '02' }];
 
-  public lineChartData2: Array<any> = [{ data: [], label: 'Movement' }, { data: [], label: 'Sound' }];
+  public lineChartData2: Array<any> = [{ data: [], label: 'Movement', yAxisId: '01' }, { data: [], label: 'Sound', yAxisId: '02' }];
   public lineChartLabels: Array<any> = [];
   public lineChartLabels2: Array<any> = [];
   public lineChartOptions: any = {
-    responsive: true
+    responsive: true,
+    scales: {
+      yAxes: [
+        {
+          id: 'yAxis1',
+          position: 'left'
+        },
+        {
+          id: 'yAxis2',
+          position: 'right'
+        }
+      ]
+    }
   };
   public lineChartColors: Array<any> = [
     {
