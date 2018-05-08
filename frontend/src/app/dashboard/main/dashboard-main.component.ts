@@ -29,7 +29,7 @@ export class DashboardMainComponent extends BaseComponent {
       this.stopLoading();
     });
 
-    this.measurementService.getAll({ from: '2000-05-07 12:00:00', to: '2018-05-08 12:00:00' }).subscribe(data => {
+    this.measurementService.getAll({ from: '2018-05-07 12:00:00', to: '2018-05-08 12:00:00' }).subscribe(data => {
       this.measurement = data;
       const datas = [];
       this.measurement.forEach(i => {
@@ -48,7 +48,7 @@ export class DashboardMainComponent extends BaseComponent {
       );
     });
 
-    this.measurementService.getAll({ from: '2000-05-08 12:00:00', to: '2018-05-09 12:00:00' }).subscribe(data => {
+    this.measurementService.getAll({ from: '2018-05-08 12:00:00', to: '2018-05-09 12:00:00' }).subscribe(data => {
       this.measurement = data;
       const datas = [];
       this.measurement.forEach(i => {

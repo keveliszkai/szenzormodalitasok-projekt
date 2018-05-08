@@ -12,11 +12,11 @@ class MeasurementController extends Controller{
 		$from = $request->get('from', false);
 		$to = $request->get('to', false);
 
-		if($from &&$to) {
+		if($from && $to) {
 			$list = Measurement::query()
 							->where('date', '>', date('Y-m-d H:i:s', strtotime($from)))
 							->where('date', '<', date('Y-m-d H:i:s', strtotime($to)))
-							->orderBy('date', 'desc')
+							->orderBy('date', 'asc')
 							->get();
 		} else {
 			$list = Measurement::query()
